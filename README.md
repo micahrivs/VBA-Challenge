@@ -1,129 +1,42 @@
 # VBA-Challenge
-# VBA Challenge Solution Code
-Sub stocks()
+VBA Homework - The VBA of Wall Street
 
-    For Each ws In Worksheets
-    
-        Dim WsStocks As String
-        Dim i As Long
-        Dim j As Long
-        Dim TickerCount As Long
-        Dim LastRowA As Long
-        Dim LastRowI As Long
+## Background
+I am excited to take on this homework assignment as I am on a path towards becoming a skilled programmer and Excel expert. The use of VBA scripting to analyze stock market data is a new challenge for me. However, I am eager to apply my knowledge and skills to this task. The ability to use VBA scripting to analyze stock market data is a valuable skill that will allow me to make informed financial decisions. I understand that this assignment may require me to spend significant time and effort, but I am willing to do so to ensure my success. Moreover, I believe that this homework will be a great opportunity for me to grow and develop as a programmer and Excel user.
 
-        Dim PercentChange As Double
+### Stock market analyst
 
-        Dim GreatIncrease As Double
-  
-        Dim GreatDecrease As Double
- 
-        Dim GreatVolease As Double
+![stock Market](Images/stockmarket.jpg)
 
-        WsStocks = ws.Name
-        
-        ws.Cells(1, 9).Value = "Ticker"
-        ws.Cells(1, 10).Value = "Yearly Change"
-        ws.Cells(1, 11).Value = "Percent Change"
-        ws.Cells(1, 12).Value = "Total Stock Volume"
-        ws.Cells(1, 16).Value = "Ticker"
-        ws.Cells(1, 17).Value = "Value"
-        ws.Cells(2, 15).Value = "Greatest % Increase"
-        ws.Cells(3, 15).Value = "Greatest % Decrease"
-        ws.Cells(4, 15).Value = "Greatest Total Volume"
-        
+## Instructions
 
-        TickerCount = 2
-        
-        j = 2
-        
-        LastRowA = ws.Cells(Rows.Count, 1).End(xlUp).Row
-        
-            For i = 2 To LastRowA
-            
-                If ws.Cells(i + 1, 1).Value <> ws.Cells(i, 1).Value Then
-                
-                ws.Cells(TickerCount, 9).Value = ws.Cells(i, 1).Value
-                
-                ws.Cells(TickerCount, 10).Value = ws.Cells(i, 6).Value - ws.Cells(j, 3).Value
-                
-                    If ws.Cells(TickerCount, 10).Value < 0 Then
-                
-                    ws.Cells(TickerCount, 10).Interior.ColorIndex = 3
-                
-                    Else
-                
-                    ws.Cells(TickerCount, 10).Interior.ColorIndex = 4
-                
-                    End If
-                    
-                    If ws.Cells(j, 3).Value <> 0 Then
-                    PercentChange = ((ws.Cells(i, 6).Value - ws.Cells(j, 3).Value) / ws.Cells(j, 3).Value)
-                    
-                    ws.Cells(TickerCount, 11).Value = Format(PercentChange, "Percent")
-                    
-                    Else
-                    
-                    ws.Cells(TickerCount, 11).Value = Format(0, "Percent")
-                    
-                    End If
-                    
-                ws.Cells(TickerCount, 12).Value = WorksheetFunction.Sum(Range(ws.Cells(j, 7), ws.Cells(i, 7)))
-                
-                TickerCount = TickerCount + 1
-                
-                j = i + 1
-                
-                End If
-            
-            Next i
-            
-        LastRowI = ws.Cells(Rows.Count, 9).End(xlUp).Row
+To complete this task, we'll start by creating a VBA macro that loops through all the stocks' data for one year and outputs the required information. Here are the steps we can follow:
+*Create a new workbook and open the Visual Basic Editor (VBE).
+*Insert a new module by clicking on Insert -> Module.
+*Define the necessary variables for the macro: Ticker, YearlyChange, PercentChange, TotalVolume, LastRow, YearOpen, YearClose.
+*Loop through all the rows of data and extract the necessary information:
+*Check if we are still in the same Ticker, and if not, store the new Ticker and YearOpen information.
+*If we are still in the same Ticker, then update the TotalVolume information.
+*When we reach the last row of a Ticker, store the YearClose information and calculate the YearlyChange and PercentChange.
+*Output the Ticker, YearlyChange, PercentChange, and TotalVolume information in the Summary Table.
+*Apply conditional formatting to the YearlyChange column to highlight positive change in green and negative change in red.
+*Format the PercentChange column to display as a percentage.
+*Finally, add some formatting and headers to the Summary Table to make it more readable.
+The resulting VBA code would look like this:
 
-        GreatVolume = ws.Cells(2, 12).Value
-        GreatIncrease = ws.Cells(2, 11).Value
-        GreatDecrease = ws.Cells(2, 11).Value
+![moderate_solution](Images/moderate_solution.png)
 
-            For i = 2 To LastRowI
-            
-                If ws.Cells(i, 12).Value > GreatVolume Then
-                GreatVolume = ws.Cells(i, 12).Value
-                ws.Cells(4, 16).Value = ws.Cells(i, 9).Value
-                
-                Else
-                
-                GreatVolume = GreatVolume
-                
-                End If
-                
-                If ws.Cells(i, 11).Value > GreatIncrease Then
-                GreatIncrease = ws.Cells(i, 11).Value
-                ws.Cells(2, 16).Value = ws.Cells(i, 9).Value
-                
-                Else
-                
-                GreatIncrease = GreatIncrease
-                
-                End If
-                
-                If ws.Cells(i, 11).Value < GreatDecrease Then
-                GreatDecrease = ws.Cells(i, 11).Value
-                ws.Cells(3, 16).Value = ws.Cells(i, 9).Value
-                
-                Else
-                
-                GreatDecrease = GreatDecrease
-                
-                End If
-                
-            ws.Cells(2, 17).Value = Format(GreatIncrease, "Percent")
-            ws.Cells(3, 17).Value = Format(GreatDecrease, "Percent")
-            ws.Cells(4, 17).Value = Format(GreatVolume, "Scientific")
-            
-            Next i
+### CHALLENGES
 
-        Worksheets(WsStocks).Columns("A:Z").AutoFit
-            
-    Next ws
+1. To provide a comprehensive analysis of stock performance, my solution will not only display the current stock prices but also offer additional metrics such as the "Greatest % increase", "Greatest % decrease", and "Greatest total volume". This functionality will enable users to gain a deeper understanding of the stock's historical trends and identify the stocks that have performed the best and worst over a specific period. Overall, my solution will provide users with a more complete picture of stock performance, empowering them to make informed investment decisions.
 
-   
-End Sub
+![hard_solution](Images/hard_solution.png)
+
+2. To enable the VBA script to run on every worksheet, i.e., for every year, with a single execution, you can make the necessary adjustments to the code. This can be achieved by creating a new subroutine, say "Main," as the entry point of the code and adding a loop that iterates through all the worksheets in the workbook. For each worksheet, the existing code can be modified to perform the required calculations or actions. Once the changes are made, executing the "Main" subroutine will apply the modified code to every worksheet in the workbook, providing the desired results.
+
+
+
+
+
+
+
