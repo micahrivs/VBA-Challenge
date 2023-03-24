@@ -6,7 +6,6 @@ I am excited to take on this homework assignment as I am on a path towards becom
 
 ### Stock market analyst
 
-![stock Market](Images/stockmarket.jpg)
 
 ## Instructions
 
@@ -22,15 +21,11 @@ To complete this task, we'll start by creating a VBA macro that loops through al
 *Apply conditional formatting to the YearlyChange column to highlight positive change in green and negative change in red.
 *Format the PercentChange column to display as a percentage.
 *Finally, add some formatting and headers to the Summary Table to make it more readable.
-The resulting VBA code would look like this:
-
-![moderate_solution](Images/moderate_solution.png)
 
 ### CHALLENGES
 
 1. To provide a comprehensive analysis of stock performance, my solution will not only display the current stock prices but also offer additional metrics such as the "Greatest % increase", "Greatest % decrease", and "Greatest total volume". This functionality will enable users to gain a deeper understanding of the stock's historical trends and identify the stocks that have performed the best and worst over a specific period. Overall, my solution will provide users with a more complete picture of stock performance, empowering them to make informed investment decisions.
 
-![hard_solution](Images/hard_solution.png)
 
 2. To enable the VBA script to run on every worksheet, i.e., for every year, with a single execution, you can make the necessary adjustments to the code. This can be achieved by creating a new subroutine, say "Main," as the entry point of the code and adding a loop that iterates through all the worksheets in the workbook. For each worksheet, the existing code can be modified to perform the required calculations or actions. Once the changes are made, executing the "Main" subroutine will apply the modified code to every worksheet in the workbook, providing the desired results.
 
